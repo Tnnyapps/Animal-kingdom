@@ -12,19 +12,20 @@ Have fun contributing
 
 
 class Animal:
-    def __init__(self, sex) -> None:
+    primary_habitat = ["Air", "Water", "Land"]
+    feeding_behaviour = [
+        "herbivores",
+        "frugivores",
+        "carnivores",
+        "insectivores",
+        "detritivores",
+        "ominivores",
+    ]
+
+    def __init__(self, sex):
         self.name = ""
         self.family = ""
-        self.endangered = ""
-        self.primary_habitat = ["Air", "Water", "Land"]
-        self.feeding_behaviour = [
-            "herbivores",
-            "frugivores",
-            "carnivores",
-            "insectivores",
-            "detritivores",
-            "ominivores",
-        ]
+        self.endangered = False
         self.predator = ""
         self.gestation = 0
         self.prey = []
@@ -50,13 +51,13 @@ class Animal:
         elif sex.lower() == "female":
             self.sex = self.adult_female
 
-    def detect_other_animal(self, other, fn):
+    def detect_other_animal(self, other):
         if self.name == other.name:
             print(f"another {self.name} detected")
             return "antelope"
         else:
             print(f"{other.name} detected")
-            fn(other)
+            self.run_away(other)
             return {other.name}
 
     def check_prey(self, prey):
@@ -64,10 +65,9 @@ class Animal:
             print(f"eats {prey.name}")
         else:
             print("cannot eat prey")
-        pass
 
-
-# Lion class
+    def run_away(self, other=None):
+        print(f"{self.name} is running away very fast!")
 
 
 class Lion(Animal):
@@ -75,19 +75,17 @@ class Lion(Animal):
 
     instance_count = 0
 
-    def __init__(self, sex="male") -> None:
+    def __init__(self, sex="male"):
         super().__init__(sex)
         self.name = "lion"
         self.family = "Felidae"
         self.prey = ["antelope", "bufaalo"]
         self.predator = ["cheetah", "lion", "hyena"]
-        self.endangered = False
         self.primary_habitat = self.primary_habitat[2]
         self.gestation = "110 days"
         self.adult_male = "lion"
         self.adult_female = "lioness"
         self.young = "cub"
-        self.sex = self.sex
         Lion.instance_count += 1
         self.set_sex(sex)
 
@@ -102,39 +100,31 @@ class Lion(Animal):
         print(f"{self.name} is now marking its territory...")
 
 
-# Antelope
 class Antelope(Animal):
     """This class describes an antelope"""
 
     instance_count = 0
 
-    def __init__(self, sex="male") -> None:
+    def __init__(self, sex="male"):
         super().__init__(sex)
         self.name = "antelope"
         self.family = "Antilocapridae"
         self.prey = ["grass", "leaves", "shoots"]
         self.predator = "humans"
-        self.endangered = False
         self.primary_habitat = self.primary_habitat[2]
         self.gestation = "260 days"
         self.adult_male = "bull"
         self.adult_female = "cow"
         self.young = "fawn"
-        self.sex = sex
-        Antelope.instance_count += 1
-        self.set_sex(sex)
 
-    def horn_clash(self, other, *others):
-        if other.name.lower() == self.name:
+    def horn_clash(self, other, *others) -> None:
+        if isinstance(other, Antelope):
             print(f"{Antelope.instance_count} Antelopes are now clashing horns")
         else:
             print(f"cannot clash horns with {other.name}")
 
-    def prong(self):
-        print("Antelope is running away veryy fast!")
 
-    def detect_other_animal(self, other, fn=prong):
-        super().detect_other_animal(other, fn)
+
 
 
 lion1 = Lion("female")
@@ -143,4 +133,3 @@ antelope1 = Antelope("female")
 antelope2 = Antelope()
 
 antelope1.detect_other_animal(lion1)
-
