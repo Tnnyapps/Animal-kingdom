@@ -8,3 +8,5 @@ To contribute, you can refactor an existing class, add new functionality to a cl
 animal from the pile of animals on [Trello](https://trello.com/invite/b/iPr34Z93/ATTId01cb0c2aed94f798511fd7bc3f5513a66638600/animal-kingdom-repsitory-board). The aim of this program is to help you learn the basic fundamentals.
 of open source contribution, such as forking a project, registering a PR, or using
 project management tools, etc.
+
+if you would like to work on this project in groups you can join the discussion on slack [here](https://join.slack.com/t/tnnyapps/shared_invite/zt-1uh6m8o04-lcI4jUoTBkB~so9~c9yNpg)
